@@ -14,8 +14,7 @@ class Gauge:
         self.value = value
         indicator_width = int(self.width * value / self.max_value)
         indicator_percent = int(100 * value / self.max_value)
-        out_str = f"[{'░' * indicator_width}{' ' * (
-                    self.width - indicator_width)}] {indicator_percent}%\t({value}/{self.max_value})\r"
+        out_str = f"[{'░' * indicator_width}{' ' * (self.width - indicator_width)}] {indicator_percent}%\t({value}/{self.max_value})\r"
         if value == self.max_value:
             out_str += "\n"
 

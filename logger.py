@@ -3,7 +3,7 @@ import logging.handlers
 import os
 import sys
 from enum import Enum
-
+from pathlib import Path
 
 class LogLevels(Enum):
     CRITICAL = 50
@@ -19,7 +19,7 @@ class LogLevels(Enum):
 class CustomLogger:
     def __init__(self, name: str, log_dir: str = None, log_level: LogLevels = None, log_format: str = None):
         if log_dir is None:
-            log_dir = os.path.dirname(__file__) + "\\log",
+            log_dir = Path(f"{os.path.dirname(__file__)}/log")
 
         if log_level is None:
             log_level = LogLevels.INFO
@@ -28,7 +28,7 @@ class CustomLogger:
             log_format = "%(asctime)s - %(levelname)s - %(module)s - %(message)s"
 
         self.__name = name
-        self.__log_dir = log_dir[0]
+        self.__log_dir = log_dir
         self.__level = log_level.value
         self.__fmt = log_format
         self.__logger = None

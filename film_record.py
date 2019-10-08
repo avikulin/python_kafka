@@ -39,22 +39,25 @@ class FilmRecord:
     @staticmethod
     def deserialize(value: Union[str, bytes]):
         if (type(value) == bytes):
-            value = value.decode("uts-8")
+            value = value.decode("utf-8")
 
         value = value[2:-2]
         tokens = value.split("|")
         data_obj = FilmRecord(None, None, None, None)
-        for token in tokens:
-            data_fields = token.split(" - ")
-            if data_fields[0] in {"cast", "genres"}:
-                data = data_fields[1][1:-1].split(",")
+        try:
+            for token in tokens:
+                data_fields = token.split(" - ")
+                if data_fields[0] in {"cast", "genres"}:
+                    data = data_fields[1][1:-1].split(",")
 
-                if data[0] == "" and len(data) == 1:
-                    del (data[0])
+                    if data[0] == "" and len(data) == 1:
+                        del (data[0])
 
-                data_fields[1] = data
+                    data_fields[1] = data
 
-            setattr(data_obj, data_fields[0], data_fields[1])
+                setattr(data_obj, data_fields[0], data_fields[1])
+        except Exception as e:
+            pass
         return data_obj
 
     @classmethod

@@ -10,7 +10,7 @@ from logger import CustomLogger
 from utils import Gauge
 
 # Global presets
-file_name = "C:\\Users\\avikulin\\Desktop\\movies.json"
+file_name = "movies.json"
 kafka_brockers = ["10.40.1.142:9092", "10.40.1.141:9092"]
 kafka_topic_name = "avikulin_test"
 kafka_clientid = "Python test util"
@@ -31,8 +31,7 @@ if __name__ == "__main__":
             films_store.append(FilmRecord.decode(item))
 
         print(f"Statistics: count ={len(data_store)}, collection type = {type(data_store)}")
-        print(f"Film store: count = {len(films_store)}, item type = {type(films_store[0]) if len(
-            films_store) > 0 else 'None'}")
+        print(f"Film store: count = {len(films_store)}, item type = {type(films_store[0]) if len(films_store) > 0 else 'None'}")
 
         logger_instance.get.info("Data successfully loaded into memory.")
 
